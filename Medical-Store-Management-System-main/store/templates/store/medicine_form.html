@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <div class="container jumbotron">
+      
+      <form action="{% url 'store:medicine-register' %}" method="POST" class="col-md-10">
+      <h2>Medicine Registration Form</h2><hr>
+        {% csrf_token %}
+        <div class="form-group">
+            <h4>Medicine Name:</h4>
+            <input type="text" class="form-control"  placeholder="Enter Medicine Name" name="medname" required>
+        </div>
+        <div class="form-group">
+            <h4>Price:</h4>
+            <input type="number" class="form-control" placeholder="Enter Medicine Price per Quantity" name="medprice" required>
+        </div>
+        <hr>
+        <center>
+        <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+        </center>
+      </form>
+    </div>
+{% endblock content %}
+  

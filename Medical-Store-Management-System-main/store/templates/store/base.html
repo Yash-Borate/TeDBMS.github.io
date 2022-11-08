@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Medical Store Management</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Medical Management System</h3>
+                <strong>MM</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url 'store:store-home' %}">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-briefcase"></i>
+                        Manage Stock
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="{% url 'store:stock-register' %}">Add</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'store:stock-all' %}">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        Staff
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href={% url 'store:staff-register' %}>Register</a>
+                        </li>
+                        <li>
+                            <a href={% url 'store:staff-all' %}>View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#medSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-medkit" aria-hidden="true"></i>
+                        Medicines
+                    </a>
+                    <ul class="collapse list-unstyled" id="medSubmenu">
+                        <li>
+                            <a href="{% url 'store:medicine-register' %}">Add</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'store:medicine-all' %}">View All</a>
+                        </li>
+                    </ul>
+                </li>                
+                <li>
+                    <a href="#supSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-medkit" aria-hidden="true"></i>
+                        Supplier
+                    </a>
+                    <ul class="collapse list-unstyled" id="supSubmenu">
+                        <li>
+                            <a href="{% url 'store:supplier-register' %}">Add</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'store:supplier-all' %}">View All</a>
+                        </li>
+                    </ul>
+                </li>                
+                <li>
+                    <a href="{% url 'store:info' %}">
+                        <i class="fas fa-image"></i>
+                        Developers
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'store:bill-all' %}">
+                        <i class="fas fa-question"></i>
+                        All Bills
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-paper-plane"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-light">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/admin">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>Message: </strong>{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {% block content %}
+                
+            {% endblock content %}
+        
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $("#add_field_button"); //Add button ID
+            
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div class="input_fields_wrap"><div class="form-row"><div class="form-group col-md-6"><select id="selectMedicine" class="form-control" name="medicine">{% for med in params.2 %}<option value={{ med.0 }}>{{ med.0 }}</option>{% endfor %}  </select></div><div class="form-group col-md-4"><input type="number" class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity"></div><div class="form-group col-md-2"><a role="button" class="btn btn-danger" id="remove_field">Remove</a></div></div></div>');
+                }
+            });
+            
+            $(wrapper).on("click","#remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').parent('div').remove(); x--;
+            })
+        });
+    </script>
+</body>
+
+</html>

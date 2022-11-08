@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+{% block content %}
+
+<div class= "container my-4 py-4">
+    <h2>All Medicines</h2><hr>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price/Quantity</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <th scope="row"> {{record.0}} </th>
+                <td> {{record.1}} </td>
+                <td> Rs. {{record.2}} </td>
+                <td><a role="button" href="{% url 'store:medicine-update' pk=record.0 %}" class="btn btn-success">Update</a></td>
+                <td><a role="button" href="{% url 'store:medicine-delete' pk=record.0 %}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <center>
+        <a style="align:center" href={% url 'store:medicine-register' %} role="button" class="btn btn-info btn-lg col-md-2">Add</a>
+    </center>
+<div>
+{% endblock content %}

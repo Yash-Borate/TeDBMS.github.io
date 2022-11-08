@@ -1,0 +1,76 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container">
+        {% comment %} Basic Information {% endcomment %}
+            <div class="card-deck">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Today's Sales:</div>
+                    <div class="card-body">
+                    <h4>Rs. {{ params.3 }}</h4>
+                    </div>
+                    <div class="card-footer bg-success border-success">
+                        <a href="{% url 'store:bill-all' %}">See Bills</a>
+                    </div>
+                </div>
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Employees:</div>
+                    <div class="card-body">
+                    <h4>{{ params.0 }}</h4>
+                    </div>
+                    <div class="card-footer border-info">
+                        <a href="{% url 'store:staff-all' %}">See All</a>
+                    </div>
+                </div>
+                <div class="card text-white bg-danger mb-3" >
+                    <div class="card-header">Soon Expiring: (In a month)</div>
+                    <div class="card-body">
+                    <h4>{{ params.1 }} </h4>
+                    </div>
+                    <div class="card-footer bg-danger border-danger">
+                        <a href="{% url 'store:stock-all' %}">See All</a>
+                    </div>
+                </div>
+            </div>
+            {% comment %} Medicines Form{% endcomment %}
+            <div class="jumbotron py-4">
+            <form method="POST" action="{% url 'store:bill-register' %}">
+                {% csrf_token %}
+                <h3>Create Bill</h3><hr>
+                <h5>Customer Name</h5>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="id" name="name" placeholder="Enter Customer Name" required>
+                </div>
+
+                
+                <div class="form-row">
+                    <h5 class="col-md-3">Medicine & Quantity</h5>
+                    <button  class="btn btn-primary btn-sm" id="add_field_button">Add Medicines</button><br>
+                </div>
+                <hr>
+
+                <div class="input_fields_wrap">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <select id="selectMedicine" name="medicine" class="form-control" required>
+                                
+                                {% for med in params.2 %}
+                                    <option value="{{ med.0 }}">{{ med.0 }}</option>
+                                {% endfor %}
+                                
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="number" class="form-control" id="quantity" required placeholder="Enter Quantity" name="quantity">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <a role="button" class="btn btn-danger" id="remove_field">Remove</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </form>
+            </div>
+</div>
+{% endblock content %}

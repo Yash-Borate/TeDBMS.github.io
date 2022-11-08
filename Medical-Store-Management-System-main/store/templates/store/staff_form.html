@@ -1,0 +1,38 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <div class= "container jumbotron p-4">
+      <h3>Staff Registration Form</h3><hr>  
+      <form action="{% url 'store:staff-register' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="firstname" class="lead">First Name:</label>
+            <input type="text" class="form-control"  id="firstnane" placeholder="Enter first name" name="firstname" required>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="lead">Last Name:</label>
+            <input type="text" class="form-control"  id="lastname" placeholder="Enter last name" name="lastname" required>
+        </div>
+        <div class="form-group">
+            <label for="gender" class="lead">Gender:</label>
+            <select class="form-group" id="gender" name="gender"  required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Prefer not to say</option>
+            </select>
+        <div class="form-group">
+            <label for="age" class="lead">Age:</label>
+            <input type="number" class="form-control"  id="age" placeholder="Enter age" name="age">
+        </div>
+        <div class="form-group">
+            <label for="salary" class="lead">Salary:</label>
+            <input type="number" class="form-control"  id="salary" placeholder="Monthly Salary Rs." name="salary" required>
+        </div>
+        </div>
+        <hr>
+        <center>
+            <button type="submit" class="btn btn-primary btn-lg col-md-2">Submit</button>
+        </center>
+      </form>
+    </div>
+{% endblock content %}
+  

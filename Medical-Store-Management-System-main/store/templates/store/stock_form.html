@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+{% block content %}
+
+<div class="container jumbotron py-4 px-8">
+  <form method="POST" action="{% url 'store:stock-register' %}">
+    {% csrf_token %}
+    <h3>Medicine Stock</h3><hr>
+    <div class="form-group">
+      <label for="name">Medicine Name</label>
+      <select id="name" name="name" class="form-control" required>
+          {% for medicine in medicines %}
+              <option value="{{ medicine }}">{{ medicine }}</option>
+          {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Enter Medicine Quantity" required>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" name="price" id="price" placeholder="Enter Total Stock Price" required>
+    </div>
+
+    <div class="form-group">
+      <label for="supplier">Supplier Name</label>
+       <select id="supplier" name="supplier" class="form-control" required> 
+          {% for supplier in suppliers %}
+              <option value="{{ supplier }}">{{ supplier }}</option>
+          {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="mfg_date">Manufacturing Date</label>
+      <input type="date" class="form-control" id="mfg_date" name="mfg_date" required>
+    </div>
+
+    <div class="form-group">
+      <label for="exp_date">Expiring Date</label>
+      <input type="date" class="form-control" id="exp_date" name="exp_date" required>
+    </div>
+    
+    <hr>
+  <center><button type="submit" class="btn btn-primary btn-lg col-md-2">Submit</button></center>
+</form>
+
+</div>
+
+
+{% endblock content %}

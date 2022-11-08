@@ -1,0 +1,50 @@
+{% extends 'store/base.html' %}
+{% block content %}
+
+<div class= "container my-4 py-4">
+
+    <form class="form-inline">
+        <div class="form-group mb-2 col-md-8">
+            <h2>Medicine Stock Record</h2>
+        </div>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group col-md-4" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="{% url 'store:stock-all' %}">Expiry Date</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    </form>
+    <h5>(Sorted By Medicine Stock)</h5>
+    <hr>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Medicine Name</th>
+            <th scope="col">Ordered Quantity</th>
+            <th scope="col">Current Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <th scope="row"> {{record.0}} </th>
+                <td> {{record.1}} </td>
+                <td> {{record.2}} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <center>
+        <a style="align:center" href={% url 'store:stock-register' %} role="button" class="btn btn-info btn-lg col-md-2">Add</a>
+    </center>
+    <hr>
+</div>
+
+{% endblock content %}

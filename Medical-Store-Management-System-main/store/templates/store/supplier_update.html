@@ -1,0 +1,27 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <div class="container jumbotron py-4 px-6">
+      <form action="{% url 'store:supplier-update' pk=supplier.0%}" method="POST" class="col-md-10">
+      <h2>Supplier Registration</h2><hr>
+        {% csrf_token %}
+        <input type="hidden" value="{{ supplier.0 }}" name="supplier_id">
+        <div class="form-group">
+            <label for="supname">Supplier Name:</label>
+            <input type="text" class="form-control" id="supnane" placeholder="{{supplier.1}}" name="supname" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" id="city" placeholder="{{supplier.2}}" name="city" required>
+        </div>
+        <div class="form-group">
+            <label for="pincode">Pincode:</label>
+            <input type="pincode" class="form-control" id="pincode" placeholder="{{supplier.3}}" name="pincode" required>
+        </div>
+        <hr>
+        <center>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </center>
+      </form>
+    </div>
+{% endblock content %}
+  
